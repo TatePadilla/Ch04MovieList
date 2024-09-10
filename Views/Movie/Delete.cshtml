@@ -1,0 +1,21 @@
+﻿<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+@using MovieList.Models
+<!--Using Movie object as a model to display properties of that object to the user.-->
+@model Movie 
+@{
+    ViewData["Title"] = "Delete Movie";
+}
+
+<h2>Confirm Deletion</h2>
+
+<h3>@Model.Name (@Model.Year)</h3>
+
+<!--Action is specified, but not controller, resulting in posting to the Delete() action of current controller (Movie Controller)-->
+<form asp-action="Delete" method="post">
+
+    <!--Bound to hidden field so the MovieId is passed to the Delete() action method when submitted.-->
+    <input type="hidden" asp-for="MovieId" />
+
+    <button type="submit" class="btn btn-primary">Delete</button> 
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
