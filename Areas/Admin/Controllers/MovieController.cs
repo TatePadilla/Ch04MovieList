@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MovieList.Models;
 
-namespace MovieList.Controllers
+namespace MovieList.Admin.Controllers
 {
+    [Area("Admin")]
     public class MovieController : Controller
     {
         private MovieContext context { get; set; }

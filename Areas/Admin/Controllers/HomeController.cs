@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieList.Models;
 
-namespace MovieList.Controllers
+namespace MovieList.Admin.Controllers
 {
+    [Area("Admin")]
     public class HomeController : Controller
     {
         private MovieContext context { get; set; }

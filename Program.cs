@@ -1,6 +1,5 @@
 using Ch04MovieList.Models;
 using Microsoft.EntityFrameworkCore;
-using MovieList.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +26,33 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-
 app.UseRouting();
-
 app.UseAuthorization();
+
+#pragma warning disable ASP0014 // Suggest using top level route registrations
+app.UseEndpoints(endpoints =>
+{
+    // Default routing for Dummy1.
+    endpoints.MapControllerRoute(
+        name: "default",
+        // Follows default pattern where the URL matches the controller name and action method.
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    // Custom routing for Dummy2.
+    endpoints.MapControllerRoute(
+        name: "customDummy2",
+        // Custom pattern/route defined with the controller and action specified.
+        pattern: "CustomRoute/Dummy2",
+        new { controller = "DummyPages", action = "Dummy2" });
+
+    // Mapping route for admin area.
+    endpoints.MapAreaControllerRoute(
+            name: "admin",
+            areaName: "Admin",
+            pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+});
+#pragma warning restore ASP0014 // Suggest using top level route registrations
+
 
 app.MapControllerRoute(
     name: "default",
